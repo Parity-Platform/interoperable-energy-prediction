@@ -1,0 +1,20 @@
+version: '3.5'
+
+services:
+  generic_adapter:
+    container_name: generic_adapter
+    image: docker-registry.inesctec.pt/interconnect-public/generic-adapter:2.1
+    restart: unless-stopped
+    ports:
+      - 9001:9001
+      - 9090:9090
+    environment:
+      - KE_HOST=https://interconnect.gridnet.gr/rest/
+      - SERVER_TOMCAT_THREADS_MAX=100
+      - CONNECT_TIMEOUT=30000
+      - READ_TIMEOUT=30000
+    logging:
+      driver: "json-file"
+      options:
+          max-size: "100m"
+          max-file: "1"
